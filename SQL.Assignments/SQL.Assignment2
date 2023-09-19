@@ -1,0 +1,73 @@
+SELECT * FROM Cart
+
+SELECT * FROM Products
+
+SELECT ProductName, UnitPrice, Quantity, CartID 
+FROM Products
+INNER JOIN Cart
+ON  Products.ProductID = Cart.ProductID
+
+SELECT ProductName, UnitPrice, Quantity, CartID 
+FROM Products
+RIGHT OUTER JOIN Cart
+ON  Products.ProductID = Cart.ProductID
+
+SELECT ProductName, UnitPrice, Quantity, CartID 
+FROM Products
+LEFT OUTER JOIN Cart
+ON  Products.ProductID = Cart.ProductID
+
+SELECT *
+FROM Products
+FULL OUTER JOIN Cart
+ON  Products.ProductID = Cart.ProductID
+
+CREATE TABLE Student
+(
+	StudentID INT,
+	StudentName VARCHAR(50) NOT NULL,
+	CourseName VARCHAR(50),
+	ContactNo INT NOT NULL,
+	City VARCHAR(50)
+	CONSTRAINT  PK_STUDENT_STUDENTID PRIMARY KEY (StudentID)
+);
+
+SELECT * FROM Student
+
+INSERT INTO Student VALUES (1001,'Mohini','Angular',789789,'Hyderabad');
+INSERT INTO Student VALUES (1002,'Yash','React',784784,'Hyderabad');
+INSERT INTO Student VALUES (1003,'Reethu','.NET',783783,'Mumbai');
+INSERT INTO Student VALUES (1004,'Wilson','Angular',782782,'Hyderabad');
+INSERT INTO Student VALUES (1005,'Roshan','HTML/CSS',781781,'Hyderabad');
+INSERT INTO Student VALUES (1006,'Manasa','React',785785,'Pune');
+INSERT INTO Student VALUES (1007,'Swetha','.NET',788788,'Hyderabad');
+INSERT INTO Student VALUES (1008,'Lahari','.NET',787787,'Pune');
+INSERT INTO Student VALUES (1009,'Sarthak','Angular',784789,'Hyderabad');
+
+DELETE FROM Student WHERE StudentID=1
+
+SELECT * FROM Student
+
+SELECT * FROM Student WHERE CourseName = 'Angular'
+
+SELECT * FROM Student WHERE City = 'Hyderabad'
+
+SELECT City, Count(*) As TotalByCity FROM Student
+GROUP BY City
+
+SELECT CourseName, Count(*) As TotalByCourse FROM Student
+GROUP BY CourseName
+
+SELECT City,CourseName, Count(*) As Total FROM Student
+GROUP BY City,CourseName
+
+SELECT * FROM Orders   
+WHERE UserID
+IN (SELECT UserID FROM Users WHERE City='Hyderabad')
+
+SELECT * FROM Orders   
+WHERE UserID
+NOT IN (SELECT UserID FROM Users WHERE City='Hyderabad')
+
+SELECT * FROM Products
+WHERE EXISTS (SELECT * FROM Products WHERE ProductID = 3)
